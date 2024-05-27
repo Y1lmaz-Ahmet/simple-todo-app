@@ -46,6 +46,7 @@ html {
 .remove-button {
   position: absolute;
   right: 0;
+  margin-left: 5px;
   background-color: rgba(245, 39, 3, 0.747);
   color: #fff;
   border: none;
@@ -54,8 +55,28 @@ html {
   cursor: pointer;
 }
 
+.update-button {
+  position: absolute;
+  left: 0px;
+  margin-left: 0px;
+  background-color: rgba(245, 39, 3, 0.747);
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  height: 39px;
+  cursor: pointer;
+}
+
+.update-button {
+  background-color: rgba(3, 136, 245, 0.747);
+}
+
+.update-button:hover {
+  background-color: rgba(3, 136, 245, 1);
+}
+
 .remove-button:hover {
-  background-color: rgba(245, 39, 3, 100);
+  background-color: rgba(245, 39, 3, 1);
 }
 
 .submit-button:hover {
@@ -73,7 +94,6 @@ li.even-task,
 li.odd-task {
   height: 39px;
 }
-
 
 .even-task {
   background-color: #cfe2f3;
@@ -165,4 +185,11 @@ li.odd-task {
 
 .tooltip-button {
   margin-left: 15px;
+}
+
+.tooltip-text {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 0.9em;
+  color: gray;
 }

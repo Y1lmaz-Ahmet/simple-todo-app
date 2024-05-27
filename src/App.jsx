@@ -5,6 +5,8 @@ function App() {
   const [inputValue, setInputValue] = useState("");
   const [tasks, setTasks] = useState([]);
   const [confirmDeleteIndex, setConfirmDeleteIndex] = useState(null);
+  const [editIndex, setEditIndex] = useState(null);
+  const [editValue, setEditValue] = useState("");
 
   // login state
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -58,10 +60,25 @@ function App() {
       alert("sorry, login credentials not correct");
     }
   };
+
   const handleLogout = () => {
     setIsLoggedIn(false);
     setUsername("");
     setPassword("");
+  };
+
+  const editTask = (index) => {
+    setEditIndex(index);
+    setEditValue(tasks[index]);
+  };
+
+  const updateTask = (index) => {
+    const updatedTasks = tasks.map((task, i) =>
+      i === index ? editValue : task
+    );
+    setTasks(updatedTasks);
+    setEditIndex(null);
+    setEditValue("");
   };
 
   // login credentials check
@@ -76,7 +93,7 @@ function App() {
           onChange={(e) => setUsername(e.target.value)}
         />
         <input
-          type='text'
+          type='password'
           placeholder='password...'
           value={password}
           onChange={(e) => setPassword(e.target.value)}
@@ -141,10 +158,30 @@ function App() {
             key={index}
             className={index % 2 === 0 ? "even-task" : "odd-task"}
           >
-            {item}
+            {editIndex === index ? (
+              <input
+                type='text'
+                value={editValue}
+                onChange={(e) => setEditValue(e.target.value)}
+              />
+            ) : (
+              item
+            )}
             <button className='remove-button' onClick={() => removeTask(index)}>
               Remove task
             </button>
+            {editIndex === index ? (
+              <button
+                className='update-button'
+                onClick={() => updateTask(index)}
+              >
+                Save
+              </button>
+            ) : (
+              <button className='update-button' onClick={() => editTask(index)}>
+                Update
+              </button>
+            )}
           </li>
         ))}
       </ul>

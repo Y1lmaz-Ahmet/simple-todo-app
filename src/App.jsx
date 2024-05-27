@@ -6,6 +6,20 @@ function App() {
   const [tasks, setTasks] = useState([]);
   const [confirmDeleteIndex, setConfirmDeleteIndex] = useState(null);
 
+  // login state
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  // hardcoded credentials for demo purposes
+  const validUsername = "user01";
+  const validPassword = "test123";
+  // show login credentials on login screen
+  const [showLoginCredentials, setShowLoginCredentials] = useState(false);
+
+  const loginCredentialsPeek = () => {
+    setShowLoginCredentials(!showLoginCredentials);
+  };
+
   const handleInputChange = (e) => {
     setInputValue(e.target.value);
   };
@@ -37,9 +51,76 @@ function App() {
     setConfirmDeleteIndex(null);
   };
 
+  const handleLogin = () => {
+    if (username === validUsername && password === validPassword) {
+      setIsLoggedIn(true);
+    } else {
+      alert("sorry, login credentials not correct");
+    }
+  };
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    setUsername("");
+    setPassword("");
+  };
+
+  // login credentials check
+  if (!isLoggedIn) {
+    return (
+      <div className='login-container'>
+        <h1>Login</h1>
+        <input
+          type='text'
+          placeholder='username...'
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+        <input
+          type='text'
+          placeholder='password...'
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <div className='tooltip-container'>
+          <button onClick={handleLogin}>login</button>
+          <button className='tooltip-button' onClick={loginCredentialsPeek}>
+            ?
+          </button>
+          <p className='tooltip-text'>
+            {showLoginCredentials ? (
+              <p>
+                For demo purposes, use Username:{" "}
+                <span
+                  style={{
+                    color: "green",
+                    fontWeight: "bold",
+                    textDecoration: "underline",
+                  }}
+                >
+                  user01
+                </span>
+                , Password:{" "}
+                <span
+                  style={{
+                    color: "green",
+                    fontWeight: "bold",
+                    textDecoration: "underline",
+                  }}
+                >
+                  test123
+                </span>
+              </p>
+            ) : (
+              ""
+            )}
+          </p>
+        </div>
+      </div>
+    );
+  }
   return (
     <div className='app-container'>
-      <h1 className='app-title'>My Tasks</h1>
+      <h1 className='app-title'>{username}'s tasks</h1>
       <form onSubmit={(e) => e.preventDefault()}>
         <input
           className='input-field'

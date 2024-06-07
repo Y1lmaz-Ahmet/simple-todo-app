@@ -19,6 +19,26 @@ html {
   text-align: center;
   background-color: #f2f5fa;
   border-radius: 8px;
+  position: relative;
+}
+
+.logout-button {
+  padding: 9px;
+  border: none;
+  border-radius: 6px;
+  background-color: #f53f3fd5;
+  color: white;
+  font-weight: 500;
+  transition: background-color 0.1s linear;
+  cursor: pointer;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+
+  &:hover {
+
+    background-color: #f53f3f;
+  }
 }
 
 .app-title {

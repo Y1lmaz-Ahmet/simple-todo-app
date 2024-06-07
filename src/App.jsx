@@ -137,6 +137,9 @@ function App() {
   }
   return (
     <div className='app-container'>
+      <button className='logout-button' onClick={handleLogout}>
+        logout
+      </button>
       <h1 className='app-title'>{username}'s tasks</h1>
       <form onSubmit={(e) => e.preventDefault()}>
         <input
